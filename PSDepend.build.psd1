@@ -15,7 +15,7 @@
     }
     BR              = @{
         Name      = "https://github.com/rdbartram/PSBuildRelease"
-        Version   = "master"
+        Version   = "feature/bugfixes"
         DependsOn = "BuildFolder"
     }
     ExtractFolder   = @{

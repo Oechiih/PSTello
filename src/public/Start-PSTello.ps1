@@ -1,10 +1,10 @@
 using namespace System.Net.Sockets
 
-function Enable-PSTelloDevMode {
+function Start-PSTello {
     param (
         [Parameter(Mandatory)]
         [System.Net.Sockets.Socket]
         $Socket
     )
-    Send-PSTelloCommand -Socket $Socket -Command 'command'
+    Send-PSTelloCommand -Socket $Socket -Command 'takeoff'
 }

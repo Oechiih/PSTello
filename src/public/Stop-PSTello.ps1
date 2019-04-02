@@ -1,16 +1,18 @@
+using namespace System.Net.Sockets
+
 function Stop-PSTello {
     param (
         [Parameter(Mandatory)]
         [System.Net.Sockets.Socket]
-        $socket,
+        $Socket,
         [Parameter()]
         [bool]
         $Emergency = $true
     )
     if ($Emergency) {
-        $EncodedText = [Text.Encoding]::ASCII.GetBytes('emergency')
-    }else {
-        $EncodedText = [Text.Encoding]::ASCII.GetBytes('land')
+        $command = 'emergency'
+    } else {
+        $command = 'land'
     }
-    $socket.send($EncodedText)
+    Send-PSTelloCommand -Socket $Socket -Command $command
 }
