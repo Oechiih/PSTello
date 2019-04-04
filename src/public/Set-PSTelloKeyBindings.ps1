@@ -6,28 +6,28 @@ function Set-PSTelloKeyBindings {
     )
 
     #region: Horizontal movement
-    Set-PSReadLineKeyHandler -Key LeftArrow
+    Set-PSReadLineKeyHandler -Key LeftArrow `
     -BriefDescription MoveLeft20cm `
         -LongDescription "Move the drone 20cm to the left" `
         -ScriptBlock {
         Move-PSTelloHorizontally -Socket $Socket -Direction 'left' -Distance 20
     }
 
-    Set-PSReadLineKeyHandler -Key RightArrow
+    Set-PSReadLineKeyHandler -Key RightArrow `
     -BriefDescription MoveRight20cm `
         -LongDescription "Move the drone 20cm to the Right" `
         -ScriptBlock {
         Move-PSTelloHorizontally -Socket $Socket -Direction 'right' -Distance 20
     }
 
-    Set-PSReadLineKeyHandler -Key UpArrow
+    Set-PSReadLineKeyHandler -Key UpArrow `
     -BriefDescription MoveForward20cm `
         -LongDescription "Move the drone 20cm to the front" `
         -ScriptBlock {
         Move-PSTelloHorizontally -Socket $Socket -Direction 'forward' -Distance 20
     }
 
-    Set-PSReadLineKeyHandler -Key DownArrow
+    Set-PSReadLineKeyHandler -Key DownArrow `
     -BriefDescription MoveBackward20cm `
         -LongDescription "Move the drone 20cm to the back" `
         -ScriptBlock {
@@ -36,14 +36,14 @@ function Set-PSTelloKeyBindings {
     #endregion
 
     #region: Vertical movement
-    Set-PSReadLineKeyHandler -Key Ctrl+UpArrow
+    Set-PSReadLineKeyHandler -Key Ctrl+UpArrow `
     -BriefDescription MoveHigher20cm `
         -LongDescription "Move the drone 20cm to higher" `
         -ScriptBlock {
         Move-PSTelloVertically -Socket $Socket -Direction 'up' -Distance 20
     }
 
-    Set-PSReadLineKeyHandler -Key Ctrl+DownArrow
+    Set-PSReadLineKeyHandler -Key Ctrl+DownArrow `
     -BriefDescription MoveLower20cm `
         -LongDescription "Move the drone 20cm to lower" `
         -ScriptBlock {
@@ -52,44 +52,44 @@ function Set-PSTelloKeyBindings {
     #endregion
 
     #region: Rotation
-    Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow
+    Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow `
     -BriefDescription RotateCCW20cm `
         -LongDescription "Rotate the drone 90 degrees Counter-CockWise" `
         -ScriptBlock {
-        Move-PSTelloRotation -Socket $Socket -Direction 'CounterClockWise' -Distance 90
+        Move-PSTelloRotation -Socket $Socket -Direction 'CounterClockWise' -Degree 90
     }
 
-    Set-PSReadLineKeyHandler -Key Ctrl+RightArrow
+    Set-PSReadLineKeyHandler -Key Ctrl+RightArrow `
     -BriefDescription RotateCW20cm `
         -LongDescription "Rotate the drone 90 degrees CockWise" `
         -ScriptBlock {
-        Move-PSTelloRotation -Socket $Socket -Direction 'ClockWise' -Distance 90
+        Move-PSTelloRotation -Socket $Socket -Direction 'ClockWise' -Degree 90
     }
     #endregion
 
     #region: Flip
-    Set-PSReadLineKeyHandler -Key Shift+UpArrow
+    Set-PSReadLineKeyHandler -Key Shift+UpArrow `
     -BriefDescription FlipForward `
         -LongDescription "Flip the drone forwards" `
         -ScriptBlock {
-        Move-PSTelloFlip -Socket $Socket -Direction 'up'
+        Move-PSTelloFlip -Socket $Socket -Direction 'forward'
     }
 
-    Set-PSReadLineKeyHandler -Key Shift+DownArrow
+    Set-PSReadLineKeyHandler -Key Shift+DownArrow `
     -BriefDescription FlipBackward `
         -LongDescription "Flip the drone backwards" `
         -ScriptBlock {
-        Move-PSTelloFlip -Socket $Socket -Direction 'down'
+        Move-PSTelloFlip -Socket $Socket -Direction 'back'
     }
 
-    Set-PSReadLineKeyHandler -Key Shift+LeftArrow
+    Set-PSReadLineKeyHandler -Key Shift+LeftArrow `
     -BriefDescription FlipLeft `
         -LongDescription "Flip the drone left" `
         -ScriptBlock {
         Move-PSTelloFlip -Socket $Socket -Direction 'left'
     }
 
-    Set-PSReadLineKeyHandler -Key Shift+RightArrow
+    Set-PSReadLineKeyHandler -Key Shift+RightArrow `
     -BriefDescription FlipRight `
         -LongDescription "Flip the drone right" `
         -ScriptBlock {
@@ -98,21 +98,21 @@ function Set-PSTelloKeyBindings {
     #endregion
 
     #region: TakeOff and landing
-    Set-PSReadLineKeyHandler -Key Ctrl+Shift+UpArrow
+    Set-PSReadLineKeyHandler -Key Ctrl+Shift+UpArrow `
     -BriefDescription TakeOff `
         -LongDescription "Start the drone" `
         -ScriptBlock {
             Start-PSTello -Socket $Socket
     }
 
-    Set-PSReadLineKeyHandler -Key Ctrl+Shift+DownArrow
+    Set-PSReadLineKeyHandler -Key Ctrl+Shift+DownArrow `
     -BriefDescription Land `
         -LongDescription "Land the drone" `
         -ScriptBlock {
         Stop-PSTello -Socket $Socket -Emergency $false
     }
 
-    Set-PSReadLineKeyHandler -Key Escape
+    Set-PSReadLineKeyHandler -Key Escape `
     -BriefDescription Emergency `
         -LongDescription "Emergency land the drone" `
         -ScriptBlock {
