@@ -6,7 +6,7 @@
 *.zip
 
 # Exclude .NET assemblies from source
-*.dll
+# *.dll
 
 # End of https://www.gitignore.io/api/powershell
 
