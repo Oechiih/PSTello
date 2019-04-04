@@ -96,4 +96,27 @@ function Set-PSTelloKeyBindings {
         Move-PSTelloFlip -Socket $Socket -Direction 'right'
     }
     #endregion
+
+    #region: TakeOff and landing
+    Set-PSReadLineKeyHandler -Key Ctrl+Shift+UpArrow
+    -BriefDescription TakeOff `
+        -LongDescription "Start the drone" `
+        -ScriptBlock {
+            Start-PSTello -Socket $Socket
+    }
+
+    Set-PSReadLineKeyHandler -Key Ctrl+Shift+DownArrow
+    -BriefDescription Land `
+        -LongDescription "Land the drone" `
+        -ScriptBlock {
+        Stop-PSTello -Socket $Socket -Emergency $false
+    }
+
+    Set-PSReadLineKeyHandler -Key Escape
+    -BriefDescription Emergency `
+        -LongDescription "Emergency land the drone" `
+        -ScriptBlock {
+        Stop-PSTello -Socket $Socket
+    }
+    #endregion
 }
