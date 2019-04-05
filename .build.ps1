@@ -4,7 +4,7 @@ Param (
 
     [Parameter()]
     [string]
-    $ProjectName = (Get-Content $PSScriptRoot\Manifest.json -Raw | ConvertFrom-Json).ModuleInfo.Name,
+    $ProjectName = (Get-Content (Join-Path -Path (Get-Location) -ChildPath 'Manifest.json') -Raw | ConvertFrom-Json).ModuleInfo.Name,
 
     [Parameter()]
     $ProjectPath = (Join-Path (Get-Location) "src"),
