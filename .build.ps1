@@ -41,13 +41,15 @@ begin {
         (Join-Path $PSScriptRoot "Dependencies"),
         (Join-Path $PSScriptRoot "src\Dependencies"),
         "C:\WINDOWS\System32\WindowsPowerShell\v1.0",
-        "C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules"
+        "C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules",
+        "C:\Program Files\WindowsPowerShell",
+        "C:\Program Files\WindowsPowerShell\Modules"
     ) -join ';'
 
     $dependencyPaths = (Join-Path $PSScriptRoot "Dependencies")
 
     foreach ($dependencyPath in $dependencyPaths) {
-        if(-not (test-path $dependencyPath -PathType Container)){
+        if (-not (Test-Path $dependencyPath -PathType Container)) {
             New-Item $dependencyPath -Force -ItemType Directory | Out-Null
         }
     }
@@ -66,7 +68,7 @@ begin {
                 force          = $true
                 ForceBootstrap = $true
             }
-            if ($PSBoundParameters.ContainsKey('Verbose')) { $providerBootstrapParams.add('Verbose', $Verbose)}
+            if ($PSBoundParameters.ContainsKey('Verbose')) { $providerBootstrapParams.add('Verbose', $Verbose) }
             if ($GalleryProxy) { $providerBootstrapParams.Add('Proxy', $GalleryProxy) }
             $null = Install-PackageProvider @providerBootstrapParams
             Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
@@ -74,12 +76,12 @@ begin {
 
         if (!(Get-Module -Listavailable PSDepend)) {
             Write-Verbose "BootStrapping PSDepend"
-            "Parameter $BuildOutput"| Write-Verbose
+            "Parameter $BuildOutput" | Write-Verbose
             $savePSDependParams = @{
                 Name = 'PSDepend'
                 Path = "$PSScriptRoot\Dependencies"
             }
-            if ($PSBoundParameters.ContainsKey('Verbose')) { $savePSDependParams.add('Verbose', $Verbose)}
+            if ($PSBoundParameters.ContainsKey('Verbose')) { $savePSDependParams.add('Verbose', $Verbose) }
             if ($GalleryRepository) { $savePSDependParams.Add('Repository', $GalleryRepository) }
             if ($GalleryProxy) { $savePSDependParams.Add('Proxy', $GalleryProxy) }
             if ($GalleryCredential) { $savePSDependParams.Add('ProxyCredential', $GalleryCredential) }
@@ -100,9 +102,9 @@ begin {
         }
 
         ##### HACK for psdepend #####
-        $map = join-path (Get-Module psdepend -Listavailable)[0].ModuleBase "psdependmap.psd1"
+        $map = Join-Path (Get-Module psdepend -Listavailable)[0].ModuleBase "psdependmap.psd1"
         $newmap = (Get-Content $map) -replace "Supports = 'windows'$", "Supports = 'windows', 'core'"
-        Set-content -path $map -Value $newmap -Force
+        Set-Content -path $map -Value $newmap -Force
         #############################
 
         $null = Invoke-PSDepend @PSDependParams
@@ -111,7 +113,7 @@ begin {
 
     if ($ResolveDependency) {
         Write-Host "Resolving Dependencies... [this can take a moment]"
-        $params = @{}
+        $params = @{ }
         if ($PSboundParameters.ContainsKey('Verbose')) {
             $params.Add('Verbose', $Verbose)
         }
@@ -128,7 +130,7 @@ process {
 
     task ResolveDependencies {
         Write-Host "Resolving Dependencies... [this can take a moment]"
-        $params = @{}
+        $params = @{ }
         if ($PSboundParameters.ContainsKey('Verbose')) {
             $params.Add('Verbose', $Verbose)
         }
@@ -136,7 +138,7 @@ process {
     }
 
     $buildFiles = Get-Item $PSScriptRoot\.build\* -Include *.ps1
-    foreach ($buildFile in $buildFiles){
+    foreach ($buildFile in $buildFiles) {
         "Importing file $($buildFile.BaseName)" | Write-Verbose
         . $buildFile.FullName
     }
