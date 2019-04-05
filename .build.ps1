@@ -33,18 +33,28 @@ Param (
 begin {
     Import-Module Microsoft.PowerShell.Utility
     $oldpaths = $env:PSModulePath
-    $env:PSModulePath = @(
-        "C:\Program Files\PowerShell\6",
-        "C:\Program Files\PowerShell\6\Modules",
-        "C:\Program Files\PowerShell\6-preview",
-        "C:\Program Files\PowerShell\6-preview\Modules",
-        (Join-Path $PSScriptRoot "Dependencies"),
-        (Join-Path $PSScriptRoot "src\Dependencies"),
-        "C:\WINDOWS\System32\WindowsPowerShell\v1.0",
-        "C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules",
-        "C:\Program Files\WindowsPowerShell",
-        "C:\Program Files\WindowsPowerShell\Modules"
-    ) -join ';'
+
+    if($PSVersionTable.PSVersion.Major -ge 6){
+        $env:PSModulePath = @(
+            "C:\Program Files\PowerShell\6",
+            "C:\Program Files\PowerShell\6\Modules",
+            "C:\Program Files\PowerShell\6-preview",
+            "C:\Program Files\PowerShell\6-preview\Modules",
+            (Join-Path $PSScriptRoot "Dependencies"),
+            (Join-Path $PSScriptRoot "src\Dependencies"),
+            "C:\WINDOWS\System32\WindowsPowerShell\v1.0",
+            "C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules"
+        ) -join ';'
+    }else {
+        $env:PSModulePath = @(
+            "C:\Program Files\WindowsPowerShell",
+            "C:\Program Files\WindowsPowerShell\Modules",
+            (Join-Path $PSScriptRoot "Dependencies"),
+            (Join-Path $PSScriptRoot "src\Dependencies"),
+            "C:\WINDOWS\System32\WindowsPowerShell\v1.0",
+            "C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules"
+        ) -join ';'
+    }
 
     $dependencyPaths = (Join-Path $PSScriptRoot "Dependencies")
 
