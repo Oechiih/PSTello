@@ -105,9 +105,10 @@ begin {
         }
 
         $PSDependParams = @{
+            Quiet       = [switch]::Present
             Force       = $true
             InputObject = $dependencyInputObject
-            Install     = $true
+            # Install     = $true
             Target      = "$PSScriptRoot\Dependencies"
         }
 
