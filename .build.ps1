@@ -34,7 +34,7 @@ begin {
     Import-Module Microsoft.PowerShell.Utility
     $oldpaths = $env:PSModulePath
 
-    if($PSVersionTable.PSVersion.Major -ge 6){
+    if ($PSVersionTable.PSVersion.Major -ge 6) {
         $env:PSModulePath = @(
             "C:\Program Files\PowerShell\6",
             "C:\Program Files\PowerShell\6\Modules",
@@ -45,7 +45,7 @@ begin {
             "C:\WINDOWS\System32\WindowsPowerShell\v1.0",
             "C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules"
         ) -join ';'
-    }else {
+    } else {
         $env:PSModulePath = @(
             "C:\Program Files\WindowsPowerShell",
             "C:\Program Files\WindowsPowerShell\Modules",
@@ -117,7 +117,7 @@ begin {
         Set-Content -path $map -Value $newmap -Force
         #############################
 
-        $null = Invoke-PSDepend @PSDependParams
+        $null = Invoke-PSDepend @PSDependParams *> $null
         Write-Verbose "Project Bootstrapped, returning to Invoke-Build"
     }
 
