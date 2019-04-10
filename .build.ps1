@@ -1,3 +1,5 @@
+#requires -module PowershellGet
+
 Param (
     [Parameter(Position = 0)]
     $Tasks,
@@ -31,6 +33,23 @@ Param (
 )
 
 begin {
+    Import-Module Microsoft.PowerShell.Utility, Microsoft.PowerShell.Security -ErrorAction SilentlyContinue
+    Get-PackageProvider | Out-Null
+
+    $oldpaths = $env:PSModulePath
+    $env:PSModulePath = @(
+        (Join-Path $PSScriptRoot "Dependencies"),
+        (Join-Path $PSScriptRoot "src\Dependencies")
+    ) -join ';'
+
+    $dependencyPaths = (Join-Path $PSScriptRoot "Dependencies")
+
+    foreach ($dependencyPath in $dependencyPaths) {
+        if (-not (Test-Path $dependencyPath -PathType Container)) {
+            New-Item $dependencyPath -Force -ItemType Directory | Out-Null
+        }
+    }
+
     if (![io.path]::IsPathRooted($BuildOutput)) {
         $BuildOutput = Join-Path -Path $PSScriptRoot -ChildPath $BuildOutput
     }
@@ -39,7 +58,7 @@ begin {
         [CmdletBinding()]
         param()
 
-        if ($NoNuget.IsPresent -and !(Get-PackageProvider -Name NuGet -ForceBootstrap)) {
+        if ($NoNuget.IsPresent -eq $false -and !(Get-PackageProvider -Name NuGet -ForceBootstrap)) {
             $providerBootstrapParams = @{
                 Name           = 'nuget'
                 force          = $true
@@ -54,18 +73,15 @@ begin {
         if (!(Get-Module -Listavailable PSDepend)) {
             Write-Verbose "BootStrapping PSDepend"
             "Parameter $BuildOutput" | Write-Verbose
-            $InstallPSDependParams = @{
-                Name         = 'PSDepend'
-                AllowClobber = $true
-                Confirm      = $false
-                Force        = $true
-                Scope        = 'CurrentUser'
+            $savePSDependParams = @{
+                Name = 'PSDepend', 'PowershellGet'
+                Path = "$PSScriptRoot\Dependencies"
             }
-            if ($PSBoundParameters.ContainsKey('verbose')) { $InstallPSDependParams.add('verbose', $verbose) }
-            if ($GalleryRepository) { $InstallPSDependParams.Add('Repository', $GalleryRepository) }
-            if ($GalleryProxy) { $InstallPSDependParams.Add('Proxy', $GalleryProxy) }
-            if ($GalleryCredential) { $InstallPSDependParams.Add('ProxyCredential', $GalleryCredential) }
-            Install-Module @InstallPSDependParams
+            if ($PSBoundParameters.ContainsKey('Verbose')) { $savePSDependParams.add('Verbose', $Verbose) }
+            if ($GalleryRepository) { $savePSDependParams.Add('Repository', $GalleryRepository) }
+            if ($GalleryProxy) { $savePSDependParams.Add('Proxy', $GalleryProxy) }
+            if ($GalleryCredential) { $savePSDependParams.Add('ProxyCredential', $GalleryCredential) }
+            Save-Module @savePSDependParams
         }
 
         $dependencyInputObject = Import-PowerShellDataFile (Join-Path $PSScriptRoot "PSDepend.build.psd1")
@@ -82,7 +98,7 @@ begin {
         }
 
         ##### HACK for psdepend #####
-        $map = Join-Path (module psdepend -Listavailable).ModuleBase "psdependmap.psd1"
+        $map = Get-Item "$PSScriptRoot\Dependencies\PSDepend\*\PSDependMap.psd1"
         $newmap = (Get-Content $map) -replace "Supports = 'windows'$", "Supports = 'windows', 'core'"
         Set-Content -path $map -Value $newmap -Force
         #############################
@@ -122,4 +138,8 @@ process {
         "Importing file $($buildFile.BaseName)" | Write-Verbose
         . $buildFile.FullName
     }
+}
+
+end {
+    $env:PSModulePath = $oldpaths
 }
