@@ -6,6 +6,7 @@
     "Author": "Jan Oehen",
     "Guid": "fb74bb4c-9e14-4a68-b43b-814b4586b3ea",
     "Description": "Control your Tello drone using PowerShell Core and Azure Cognitive Services.",
+    "PowerShellVersion": "5.1",
     "CompatiblePSEditions": [
 "Core",
 "Desktop"
