@@ -1,6 +1,6 @@
 @{
     PSDependOptions = @{
-        Target = '$DependencyFolder\Dependencies'
+        Target    = '$DependencyFolder\Dependencies'
         AddToPath = $true
     }
 
@@ -15,7 +15,7 @@
     }
     BR              = @{
         Name      = "https://github.com/rdbartram/PSBuildRelease"
-        Version   = "feature/bugfixes"
+        Version   = "master"
         DependsOn = "BuildFolder"
     }
     ExtractFolder   = @{
