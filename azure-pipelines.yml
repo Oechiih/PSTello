@@ -24,7 +24,7 @@ pr:
 jobs:
   - template: Yaml Build Defintions/ModuleTestIncPublish.yml@templates # https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema#job-templates
     parameters:
-      baseRepoId: oechiih/PSTello     # ID of the repo targeted by the build definition
-      baseBuildDefinitionId: 3
+      baseRepoId: Oechiih/PSTello     # ID of the repo targeted by the build definition
+      baseBuildDefinitionId: 5
       coverageThreshold: 1     # Minimum Pester Coverage
-      agent: Hosted Windows 2019 with VS2019
+      agent: Hosted VS2017
