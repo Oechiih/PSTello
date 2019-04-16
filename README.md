@@ -21,7 +21,7 @@ Control your Tello drone using PowerShell Core and Azure Cognitive Services(to c
 
 ## Installation
 
-Install the module from the powershellgallery using:
+Install the module from the powershellgallery using:dsfgdsfgdgf
 
 ```powershell
 Install-Module 'PSTello' -Scope CurrentUser
