@@ -14,3 +14,5 @@ Dependencies/*
 .build/*
 BuildOutput/*
 src/*xml
+PSTello-help.xml
+about_PSTello.help.txt

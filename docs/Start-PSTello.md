@@ -1,0 +1,67 @@
+---
+external help file: PSTello-help.xml
+Module Name: pstello
+online version: http://pstello.readthedocs.org/StartPSTello.html
+schema: 2.0.0
+---
+
+# Start-PSTello
+
+## SYNOPSIS
+
+Start your Tello drone i.e. taking off
+
+## SYNTAX
+
+```powershell
+Start-PSTello [-Socket] <Socket> [<CommonParameters>]
+```
+
+## DESCRIPTION
+
+Start your Tello drone i.e. taking off
+
+## EXAMPLES
+
+### Take off
+
+```powershell
+PS C:\> $socket = Connect-PSTello
+PS C:\> Start-PStello -Socket $socket
+```
+
+Issue the command to take off to your Tello drone
+
+## PARAMETERS
+
+### -Socket
+
+The UDP socket object connected to your Tello drone
+
+```yaml
+Type: System.Net.Sockets.Socket
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
+
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+## INPUTS
+
+### None
+
+## OUTPUTS
+
+### None
+
+## NOTES
+
+## RELATED LINKS
