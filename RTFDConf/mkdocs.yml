@@ -2,13 +2,13 @@
 # reference: https://www.mkdocs.org/user-guide/configuration/
 site_name: PSTello
 repo_url: https://github.com/oechiih/PSTello
-nav:
-  - 'Blog': https://www.dftai.ch/
+# nav:
+#   - 'Blog': https://www.dftai.ch/
 theme:
     name: 'material'
     palette:
       primary: 'indigo'
       accent: 'orange'
-    logo: 'dftai.png'
+    logo: 'images/dftai.png'
     feature:
       tabs: true
