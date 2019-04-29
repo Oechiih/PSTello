@@ -20,6 +20,4 @@ formats: all
 python:
   version: 3.7
   install:
-    - method: pip
-      extra_requirements:
-          - 'mkdocs-material'
+      - requirements: docs/conf/rtfd.requirements.txt
