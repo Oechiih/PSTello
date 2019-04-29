@@ -1,0 +1,12 @@
+# MKDocs configuration file
+# reference: https://www.mkdocs.org/user-guide/configuration/
+site_name: Marshmallow Generator
+repo_url: https://github.com/oechiih/PSTello
+nav:
+  - 'Blog': https://www.dftai.ch/
+theme:
+    name: 'material'
+    palette:
+      primary: 'deep orange'
+      accent: 'pink'
+    logo: 'dfati.png'
