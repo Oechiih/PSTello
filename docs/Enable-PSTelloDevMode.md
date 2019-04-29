@@ -1,7 +1,7 @@
 ---
 external help file: PSTello-help.xml
 Module Name: pstello
-online version: http://pstello.readthedocs.org/EnablePSTelloDevMode.html
+online version: http://pstello.readthedocs.org/en/latest/Enable-PSTelloDevMode
 schema: 2.0.0
 ---
 

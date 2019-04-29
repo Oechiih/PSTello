@@ -1,7 +1,7 @@
 ---
 external help file: PSTello-help.xml
 Module Name: pstello
-online version: http://pstello.readthedocs.org/MovePSTelloVertically.html
+online version: http://pstello.readthedocs.org/en/latest/Move-PSTelloVertically
 schema: 2.0.0
 ---
 

@@ -1,7 +1,7 @@
 ---
 external help file: PSTello-help.xml
 Module Name: pstello
-online version: http://pstello.readthedocs.org/SendPSTello.html
+online version: http://pstello.readthedocs.org/en/latest/Send-PSTello
 schema: 2.0.0
 ---
 

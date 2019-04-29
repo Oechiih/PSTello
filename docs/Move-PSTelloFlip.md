@@ -1,7 +1,7 @@
 ---
 external help file: PSTello-help.xml
 Module Name: pstello
-online version: http://pstello.readthedocs.org/MovePSTelloFlip.html
+online version: http://pstello.readthedocs.org/en/latest/Move-PSTelloFlip
 schema: 2.0.0
 ---
 

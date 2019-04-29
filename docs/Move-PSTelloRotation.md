@@ -1,7 +1,7 @@
 ---
 external help file: PSTello-help.xml
 Module Name: pstello
-online version: http://pstello.readthedocs.org/MovePSTelloRotation.html
+online version: http://pstello.readthedocs.org/en/latest/Move-PSTelloRotation
 schema: 2.0.0
 ---
 
